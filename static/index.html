@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f3eee4">
+<title>Marginalia — Read closely</title>
+<meta name="description" content="A local English reader with dictionary lookup, Oxford Chinese definitions, and spaced review.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23211f1a'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='38' fill='%23f3eee4' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23211f1a'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='36' fill='%23f3eee4' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M9 7h7M9 11h5"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+    <symbol id="i-cards" viewBox="0 0 24 24"><rect x="3" y="6" width="14" height="15" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m20 6-11 11-5-5"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 15H6L5 6"/><path d="M10 11v6M14 11v6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 21h16"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M4 21h16"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4a8.5 8.5 0 1 0 11.5 11.5z"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M20 14v6H4V4h6"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></symbol>
+    <symbol id="i-highlight" viewBox="0 0 24 24"><path d="m9 11 6-6 4 4-6 6"/><path d="M3 21h18"/><path d="m9 11-5 5v4h4l5-5"/></symbol>
+    <symbol id="i-type" viewBox="0 0 24 24"><path d="M4 7V4h16v3"/><path d="M9 20h6M12 4v16"/></symbol>
+  </defs>
+</svg>
+
+<div class="app">
+  <aside class="sidebar">
+    <a class="brand" href="#" data-view="library" aria-label="Marginalia home">
+      <span class="brand-mark">M</span>
+      <span class="brand-name">Marginalia<span class="brand-sub">Read closely</span></span>
+    </a>
+
+    <nav class="nav" aria-label="Main">
+      <button class="nav-item active" data-view="library">
+        <svg class="ic"><use href="#i-book"/></svg> Library
+      </button>
+      <button class="nav-item" data-view="notebook">
+        <svg class="ic"><use href="#i-note"/></svg> Notebook
+        <span class="nav-count" id="navNotebookCount">0</span>
+      </button>
+      <button class="nav-item" data-view="excerpts">
+        <svg class="ic"><use href="#i-highlight"/></svg> Excerpts
+        <span class="nav-count" id="navHighlightCount">0</span>
+      </button>
+      <button class="nav-item" data-view="review">
+        <svg class="ic"><use href="#i-cards"/></svg> Review
+        <span class="nav-count due" id="navDueCount">0</span>
+      </button>
+    </nav>
+
+    <div class="side-docs">
+      <div class="side-head"><span>Documents</span><button id="sideAdd" class="mini-add" title="Add a document">+</button></div>
+      <div id="recentDocs" class="recent-docs"></div>
+    </div>
+
+    <div class="side-foot">
+      <div class="source-status" id="sourceStatus">
+        <span class="dot"></span> Checking dictionaries…
+      </div>
+      <button class="side-settings" data-settings>
+        <svg class="ic"><use href="#i-settings"/></svg> Settings
+      </button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <!-- LIBRARY -->
+    <section class="view" id="view-library">
+      <header class="page-head">
+        <div>
+          <p class="eyebrow">Your library</p>
+          <h1>Read closely.</h1>
+          <p class="page-sub">Drop a text, select a word, keep what matters.</p>
+        </div>
+        <button class="btn btn-primary" id="libraryAdd">
+          <svg class="ic"><use href="#i-plus"/></svg> Add document
+        </button>
+      </header>
+
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">Documents</span><strong id="statDocs">0</strong></div>
+        <div class="stat"><span class="stat-label">Words kept</span><strong id="statWords">0</strong></div>
+        <div class="stat"><span class="stat-label">Due today</span><strong id="statDue">0</strong></div>
+      </div>
+
+      <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload a document">
+        <div class="drop-icon">
+          <svg class="ic"><use href="#i-upload"/></svg>
+        </div>
+        <h2>Drop a PDF, Word, EPUB, or text file</h2>
+        <p>or <span class="link">browse files</span> · everything stays on this Mac</p>
+        <div class="formats">PDF · DOCX · EPUB · TXT · MD · HTML</div>
+        <div class="uploading" id="uploadState" hidden><span class="spinner"></span> Reading document…</div>
+      </div>
+
+      <div class="section-head">
+        <h2>Documents</h2>
+        <span id="docCount">0</span>
+      </div>
+      <div class="doc-grid" id="libraryDocs"></div>
+      <div class="empty-state" id="libraryEmpty" hidden>
+        <svg class="ic"><use href="#i-book"/></svg>
+        <p>Your library is empty. Add a book, an article, or a paper to begin.</p>
+      </div>
+    </section>
+
+    <!-- READER -->
+    <section class="view reader-view" id="view-reader" hidden>
+      <div class="reader-top">
+        <button class="icon-btn" id="backToLibrary" aria-label="Back to library">
+          <svg class="ic"><use href="#i-back"/></svg>
+        </button>
+        <div class="reader-title">
+          <h1 id="docTitle">Untitled</h1>
+          <span id="docMeta"></span>
+          <button class="text-check-chip" id="textCheckBtn" hidden>Text check</button>
+        </div>
+        <div class="reader-tools">
+          <button class="tool-btn" id="fontMinus" title="Smaller text">A−</button>
+          <button class="tool-btn" id="fontPlus" title="Larger text">A+</button>
+          <button class="tool-btn icon" id="themeToggle" title="Toggle theme">
+            <svg class="ic"><use href="#i-moon"/></svg>
+          </button>
+          <button class="tool-btn icon" id="openExcerpts" title="Excerpts">
+            <svg class="ic"><use href="#i-highlight"/></svg>
+          </button>
+          <button class="tool-btn" id="openNotebook" title="Open notebook">
+            <svg class="ic"><use href="#i-note"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="reader-progress"><i id="readerProgress"></i></div>
+
+      <div class="reader-shell">
+        <div class="reader-pane" id="readerPane">
+          <article class="paper" id="readerText"></article>
+        </div>
+
+        <aside class="dict-panel" id="dictPanel">
+          <button class="dict-close" id="closeDict" aria-label="Close dictionary">
+            <svg class="ic"><use href="#i-x"/></svg>
+          </button>
+
+          <div class="dict-empty" id="dictEmpty">
+            <div class="dict-empty-mark"><svg class="ic"><use href="#i-search"/></svg></div>
+            <h3>Select a word</h3>
+            <p>Highlight a word in the text to see its English and Chinese definitions.</p>
+            <div class="recent-words" id="recentWords"></div>
+          </div>
+
+          <div class="dict-loading" id="dictLoading" hidden>
+            <span class="spinner"></span>
+            <p>Looking up…</p>
+          </div>
+
+          <div class="dict-content" id="dictContent" hidden>
+            <div class="dict-head">
+              <div>
+                <h2 id="lookupWord">word</h2>
+                <p class="lookup-phonetic" id="lookupPhonetic"></p>
+              </div>
+              <button class="audio-btn" id="speakBtn" title="Pronounce">
+                <svg class="ic"><use href="#i-volume"/></svg>
+              </button>
+            </div>
+            <div class="dict-actions">
+              <button class="btn btn-primary btn-sm" id="addWordBtn">
+                <svg class="ic"><use href="#i-plus"/></svg> Add to notebook
+              </button>
+              <span class="saved-note" id="savedNote"></span>
+            </div>
+            <div class="lookup-tabs" id="lookupTabs" role="tablist"></div>
+            <div class="lookup-pane" id="lookupPane"></div>
+            <p class="dict-source-note" id="dictSourceNote"></p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- NOTEBOOK -->
+    <section class="view" id="view-notebook" hidden>
+      <header class="page-head">
+        <div>
+          <p class="eyebrow">Notebook</p>
+          <h1>Words you kept.</h1>
+          <p class="page-sub" id="notebookSub">Words saved from your reading, with their original context.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-outline" id="resumeReading" hidden>
+            <svg class="ic"><use href="#i-book"/></svg> Continue reading
+          </button>
+          <button class="btn btn-primary" id="startReviewBtn">
+            <svg class="ic"><use href="#i-cards"/></svg> Review due
+          </button>
+        </div>
+      </header>
+
+      <div class="notebook-toolbar">
+        <div class="search">
+          <svg class="ic"><use href="#i-search"/></svg>
+          <input id="notebookSearch" type="search" placeholder="Search words, definitions, or context" autocomplete="off">
+        </div>
+        <a class="btn btn-outline btn-sm" id="exportBtn" href="/api/export">
+          <svg class="ic"><use href="#i-download"/></svg> Export
+        </a>
+      </div>
+
+      <div class="notebook-list" id="notebookList"></div>
+      <div class="empty-state" id="notebookEmpty" hidden>
+        <svg class="ic"><use href="#i-note"/></svg>
+        <p>No words yet. Select one while reading and add it to your notebook.</p>
+      </div>
+    </section>
+
+    <!-- EXCERPTS -->
+    <section class="view" id="view-excerpts" hidden>
+      <header class="page-head">
+        <div>
+          <p class="eyebrow">Reading notes</p>
+          <h1>Excerpts.</h1>
+          <p class="page-sub">Every sentence you highlighted, kept in context.</p>
+        </div>
+        <span class="excerpt-total" id="excerptTotal"></span>
+      </header>
+      <div class="excerpt-tools">
+        <label class="search-field excerpt-search">
+          <svg class="ic"><use href="#i-search"/></svg>
+          <input id="excerptSearch" type="search" placeholder="Search excerpts or books" autocomplete="off">
+        </label>
+        <select id="excerptDocFilter" aria-label="Filter by book"></select>
+      </div>
+      <div class="excerpt-list" id="excerptsList"></div>
+      <div class="empty-state" id="excerptsEmpty" hidden>
+        <svg class="ic"><use href="#i-highlight"/></svg>
+        <p>No highlights yet. Select a sentence while reading and click <strong>Highlight sentence</strong>.</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<nav class="bottom-nav" aria-label="Mobile">
+  <button class="active" data-view="library"><svg class="ic"><use href="#i-book"/></svg>Library</button>
+  <button data-view="notebook"><svg class="ic"><use href="#i-note"/></svg>Notebook</button>
+  <button data-view="excerpts"><svg class="ic"><use href="#i-highlight"/></svg>Excerpts</button>
+  <button data-view="review"><svg class="ic"><use href="#i-cards"/></svg>Review</button>
+  <button data-settings><svg class="ic"><use href="#i-settings"/></svg>Settings</button>
+</nav>
+
+<!-- REVIEW -->
+<div class="review-overlay" id="reviewOverlay" hidden>
+  <div class="review-top">
+    <button class="btn btn-ghost btn-sm" id="exitReview">
+      <svg class="ic"><use href="#i-back"/></svg> Exit
+    </button>
+    <div class="review-progress">
+      <div class="review-progress-text"><span id="reviewCount">0 due</span><span id="reviewAccuracy"></span></div>
+      <div class="bar"><i id="reviewBar"></i></div>
+    </div>
+    <div class="review-timer" id="reviewTimer">00:00</div>
+  </div>
+
+  <div class="review-stage">
+    <div class="review-card" id="reviewCard">
+      <p class="eyebrow" id="reviewLabel">Review</p>
+      <h2 id="reviewWord">word</h2>
+      <p class="lookup-phonetic" id="reviewPhonetic"></p>
+      <p class="review-context" id="reviewContext"></p>
+      <div class="review-answer" id="reviewAnswer" hidden></div>
+      <button class="reveal-btn" id="revealReview">Show definition <kbd>Space</kbd></button>
+    </div>
+    <div class="review-grades" id="reviewGrades" hidden>
+      <div class="grades-label"><span>How well did you know it?</span><span>Press 1–4</span></div>
+      <div class="grade-grid">
+        <button class="grade again" data-grade="1"><kbd>1</kbd><span>Again</span><small></small></button>
+        <button class="grade hard" data-grade="2"><kbd>2</kbd><span>Hard</span><small></small></button>
+        <button class="grade good" data-grade="3"><kbd>3</kbd><span>Good</span><small></small></button>
+        <button class="grade easy" data-grade="4"><kbd>4</kbd><span>Easy</span><small></small></button>
+      </div>
+    </div>
+    <div class="review-summary" id="reviewSummary" hidden></div>
+  </div>
+</div>
+
+<div class="selection-toolbar" id="selectionToolbar" hidden>
+  <button id="highlightSelection"><svg class="ic"><use href="#i-highlight"/></svg> Highlight sentence</button>
+</div>
+
+<input type="file" id="fileInput" multiple accept=".pdf,.docx,.epub,.txt,.md,.markdown,.html,.htm" hidden>
+<div id="modalRoot"></div>
+<div id="toastRoot" aria-live="polite"></div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

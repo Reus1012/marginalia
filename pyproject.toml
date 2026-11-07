@@ -1,0 +1,16 @@
+[project]
+name = "marginalia-reader"
+version = "1.1.0"
+description = "A local English reader with dictionary lookup, a notebook, and spaced review."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "GPL-3.0-only" }
+authors = [{ name = "Marginalia contributors" }]
+dependencies = [
+  "pypdf>=6.0,<7",
+  "beautifulsoup4>=4.12,<5",
+  "readmdict>=0.1.1,<0.2",
+]
+
+[project.urls]
+Homepage = "https://github.com/your-name/marginalia"
