@@ -1,0 +1,28 @@
+# Local runtime
+.venv/
+__pycache__/
+*.py[cod]
+data/*
+!data/.gitkeep
+*.db
+*.db-wal
+*.db-shm
+dist/
+build/
+.pyinstaller/
+*.spec
+server.log
+
+# Native helpers are built from source
+bin/dictlookup
+bin/pdftext
+
+# Dictionaries are licensed content; never commit them
+dictionaries/*
+!dictionaries/README.md
+*.mdx
+*.mdd
+*.eubak
+
+# macOS
+.DS_Store
